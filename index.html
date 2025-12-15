@@ -77,7 +77,6 @@ main{
 }
 .cell.filled{cursor:default}
 
-/* ✅ 最後一手框線 */
 .cell.last-move{
   outline:4px solid var(--accent);
   box-shadow:0 0 0 6px rgba(255,183,3,.35);
@@ -404,13 +403,11 @@ function placeAt(i){
 function aiSelect(){
   const candidates=pieces.filter(p=>!used[p.id]);
 
-  // 1️⃣ 不給你「一放就贏」的棋
   const safe=candidates.filter(p=>{
     const empties=board.map((v,i)=>v===null?i:null).filter(v=>v!=null);
     return !empties.some(i=>wouldWin(board,i,p.id));
   });
 
-  // 2️⃣ 優先給「屬性分散」的棋
   function score(p){
     let s=0;
     ["color","height","shape","hollow"].forEach(a=>{
@@ -488,8 +485,7 @@ function checkWin(who){
       if(ps.every(p => p[attr] === ps[0][attr])){
         gameOver = true;
 
-        // 👉 若你有做「勝利線框起來」，可以順便記住
-        // winCells = l.slice(0,4);
+        winCells = l.slice(0,4);
 
         showModal(
           `${who} 獲勝 🎉`,
@@ -507,7 +503,6 @@ function checkWin(who){
     }
   }
 
-  // 平手
   if(used.every(v => v)){
     gameOver = true;
     showModal(
@@ -535,3 +530,4 @@ render();
 </script>
 </body>
 </html>
+
