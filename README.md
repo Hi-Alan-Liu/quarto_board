@@ -59,3 +59,4 @@ AI 再選一顆棋子交給你（右側會被框起來）。
 ---
 
 ## 🚀 使用方式
+https://hi-alan-liu.github.io/quarto-board/
